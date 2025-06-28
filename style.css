@@ -8,83 +8,100 @@
     --countdown-bg-color: #E0E6D6; /* Fondo para el contador y detalles del evento */
 }
 
+
 /* Estilos generales y reseteo */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Cormorant Garamond', serif;
     background-color: var(--light-bg-color);
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alinea al inicio para el scroll */
+    align-items: flex-start;
     min-height: 100vh;
     color: var(--primary-text-color);
-    /* Permitir el scroll en el body */
-    overflow-y: auto; /* Permitir scroll vertical */
-    overflow-x: hidden; /* Evitar scroll horizontal */
-    scroll-behavior: smooth; /* Scroll suave nativo del navegador */
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Contenedor principal que simula el dispositivo móvil */
 .invitation-wrapper {
     width: 100%;
-    max-width: 420px; /* Ancho fijo para simular el formato móvil */
-    min-height: 100vh; /* Para que siempre tenga al menos la altura de la pantalla */
+    min-height: 100vh;
     background-color: var(--page-bg-color);
     box-shadow: 0 0 25px rgba(0,0,0,0.15);
-    position: relative; /* Para el posicionamiento de las flores */
-    display: flex; /* Para que las secciones se apilen verticalmente */
+    position: relative;
+    display: flex;
     flex-direction: column;
+    max-width: 100vw;
 }
 
 /* Estilos para todas las secciones de la invitación */
 .invitation-section {
     width: 100%;
-    height: 100vh; /* Cada sección ocupa la altura completa de la ventana */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 30px 25px;
+    padding: 20px 15px;
     box-sizing: border-box;
-    background-color: var(--page-bg-color); /* Fondo por defecto */
-    position: relative; /* Para que los elementos decorativos internos se posicionen bien */
-    overflow: hidden; /* Para contener las decoraciones */
+    background-color: var(--page-bg-color);
+    position: relative;
+    overflow: hidden;
 }
 
 /* Primera sección (el sobre) */
 .cover-section {
+    transform: scale(1.1);
     background-color: var(--page-bg-color);
-    background-image: url('img9.jpg'); /* Usa esta URL */
+    position: relative;
+    z-index: 2;
+}
+
+.cover-section::before {
+    content: '';
+    transform: scale(1.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img10.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--page-bg-color); 
-    z-index: 2; /* Asegura que esté por encima del contenido oculto inicialmente */
+    opacity: 0.4;
+    z-index: -1;
 }
 
 /* Contenedor para el contenido principal después del sobre */
 .main-invitation-content {
-    /* Por defecto, lo ocultamos hasta el clic en el sobre */
-    opacity: 1; /* Esto se controlará con JS */
+    opacity: 1;
     transition: opacity 1s ease-in-out;
-    width: 100%; /* Ocupa el ancho completo del wrapper */
+    width: 100%;
 }
 
 .main-invitation-content.hidden {
-    /* Esto lo controlará el JS al inicio */
     opacity: 0;
     visibility: hidden;
-    height: 0; /* Para que no ocupe espacio visual ni de scroll */
+    height: 0;
     overflow: hidden;
 }
 
 .main-invitation-content.visible {
     opacity: 1;
     visibility: visible;
-    height: auto; /* Permite que ocupe su altura natural */
+    height: auto;
     overflow: visible;
 }
-
 
 /* Contenedor interno para el contenido de cada sección */
 .section-content {
@@ -94,116 +111,122 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Para que el contenido interno se centre verticalmente dentro de la sección */
+    min-height: 100%;
+    padding: 20px 0;
 }
 
-/* TIPOGRAFÍA (Se mantienen los estilos anteriores, solo ajustando los selectores si es necesario) */
+.section-content-scale {
+    transform: scale(0.9);
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 20px 0;
+}
+
+/* TIPOGRAFÍA RESPONSIVE */
 .small-text-top {
     font-family: 'Playfair Display', serif;
-    font-size: 0.9em;
-    letter-spacing: 3px;
+    font-size: clamp(0.8em, 3vw, 0.9em);
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--primary-text-color);
     margin-bottom: 10px;
     font-weight: 400;
+    text-align: center;
 }
 
 .main-names {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.8em;
-    color: var(--secondary-text-color);
-    margin: 0 0 30px 0;
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-size: clamp(2.5em, 8vw, 3.8em);
+    /* color: var(--secondary-text-color); */
     line-height: 1;
     font-weight: 400;
 }
 
 .small-text-bottom {
     font-family: 'Playfair Display', serif;
-    font-size: 1em;
-    letter-spacing: 2px;
+    font-size: clamp(0.9em, 3vw, 1em);
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--primary-text-color);
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .number-of-places {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.5em;
+    font-size: clamp(2.5em, 8vw, 3.5em);
     color: var(--secondary-text-color);
     margin: 0 0 5px 0;
+    text-align: center;
 }
 
 .small-text-honor {
     font-family: 'Playfair Display', serif;
-    font-size: 0.9em;
-    letter-spacing: 2px;
+    font-size: clamp(0.8em, 3vw, 0.9em);
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--primary-text-color);
     margin-top: 0;
+    text-align: center;
 }
 
 .welcome-message {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1em;
+    font-size: clamp(1em, 4vw, 1.1em);
     color: var(--primary-text-color);
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-weight: 500;
+    text-align: center;
 }
 
 .invitation-blurb {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1em;
+    font-size: clamp(1em, 4vw, 1.1em);
     color: var(--primary-text-color);
     line-height: 1.8;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-weight: 500;
+    text-align: center;
 }
 
 .bible-verse {
     font-family: 'Great Vibes', cursive;
-    font-size: 1.6em;
+    font-size: clamp(1.3em, 5vw, 1.6em);
     color: var(--secondary-text-color);
-    margin-top: 25px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 25px;
     line-height: 1.4;
+    text-align: center;
 }
 
 .bible-verse.small-verse {
-    font-size: 1.4em;
+    font-size: 2em;
 }
 
 .countdown-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
+    font-size: clamp(1.5em, 5vw, 1.8em);
     color: var(--primary-text-color);
     margin-bottom: 10px;
     font-weight: 700;
-}
-
-.invitation-section {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 30px 25px;
-    box-sizing: border-box;
-    background-color: var(--page-bg-color); /* Fondo por defecto, será sobrescrito si aplica */
-    position: relative;
-    overflow: hidden;
+    text-align: center;
 }
 
 #invitation-text-section {
-    background-image: url('http://googleusercontent.com/image_collection/image_retrieval/9555681712359090777'); /* Usa esta URL */
+    background-image: url('http://googleusercontent.com/image_collection/image_retrieval/9555681712359090777');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--page-bg-color); 
-    /* Puedes ajustar la opacidad o blend-mode si lo deseas */
-    /* filter: opacity(0.8); */ 
+    background-color: var(--page-bg-color);
 }
 
 .countdown-timer {
@@ -212,103 +235,115 @@ body {
     align-items: baseline;
     font-family: 'Playfair Display', serif;
     font-weight: 500;
-    font-size: 1.3em;
+    font-size: clamp(1em, 4vw, 1.3em);
     color: #3b4e4e;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .countdown-timer span {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 5px;
+    margin: 0 2px;
+    min-width: 40px;
 }
 
 .countdown-timer .unit {
-    font-size: 0.45em;
+    font-size: 0.4em;
     text-transform: uppercase;
-    margin-top: 5px;
+    margin-top: 3px;
     color: #6a7c7c;
     font-weight: 500;
 }
 
 .save-the-date-text {
     font-family: 'Great Vibes', cursive;
-    font-size: 2.8em;
+    font-size: clamp(2em, 7vw, 2.8em);
     color: var(--secondary-text-color);
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .wedding-date {
     font-family: 'Playfair Display', serif;
-    font-size: 2em;
+    font-size: clamp(1.5em, 5vw, 2em);
     color: var(--primary-text-color);
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
+    text-align: center;
 }
 
 .event-type {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6em;
-    color: var(--secondary-text-color);
-    margin-bottom: 10px;
-    margin-top: 30px;
+    font-size: clamp(1.3em, 5vw, 1.6em);
+    color: white;
+    margin-bottom: 8px;
+    margin-top: 25px;
     font-weight: 700;
+    text-align: center;
 }
 
 .event-time {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3em;
-    color: var(--primary-text-color);
-    margin-bottom: 8px;
+    font-size: clamp(1.1em, 4vw, 1.3em);
+    color: white;
+    margin-bottom: 6px;
     font-weight: 600;
+    text-align: center;
 }
 
 .event-place {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1em;
-    color: var(--primary-text-color);
-    margin-bottom: 20px;
+    font-size: clamp(0.9em, 3.5vw, 1em);
+    color: white;
+    margin-bottom: 15px;
     line-height: 1.5;
+    text-align: center;
 }
 
 .dress-code-title {
     font-family: 'Great Vibes', cursive;
-    font-size: 2.8em;
-    color: var(--secondary-text-color);
-    margin-top: 30px;
-    margin-bottom: 15px;
+    font-size: clamp(2em, 7vw, 2.8em);
+    color: white;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
 .dress-code-type {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5em;
-    color: var(--primary-text-color);
-    margin-bottom: 10px;
+    font-size: clamp(1.2em, 4.5vw, 1.5em);
+    color: white;
+    margin-bottom: 8px;
     font-weight: 700;
+    text-align: center;
 }
 
 .dress-code-description {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1em;
-    color: var(--primary-text-color);
+    font-size: clamp(1em, 3.5vw, 1em);
+    color: white;
     line-height: 1.7;
     max-width: 280px;
     margin: 0 auto;
+    text-align: center;
 }
 
 /* SOBRE Y CLICK */
 .envelope-wrapper {
     position: relative;
     cursor: pointer;
-    margin: 40px 0;
+    margin: 30px 0;
     display: inline-block;
     animation: pulse 2s infinite;
+    touch-action: manipulation;
 }
 
 .envelope-image {
-    width: 280px;
+    width: clamp(200px, 60vw, 280px);
     height: auto;
     display: block;
     filter: drop-shadow(0 5px 8px rgba(0,0,0,0.1));
@@ -316,11 +351,11 @@ body {
 
 .click-to-open {
     position: absolute;
-    bottom: -25px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95em;
+    font-size: clamp(0.8em, 3vw, 0.95em);
     color: var(--secondary-text-color);
     font-style: italic;
     white-space: nowrap;
@@ -332,8 +367,8 @@ body {
 /* BORDES FLORALES */
 .flower-decoration {
     position: absolute;
-    width: 140px;
-    height: 140px;
+    width: clamp(80px, 25vw, 140px);
+    height: clamp(80px, 25vw, 140px);
     background-image: url('https://i.imgur.com/your_flowers_image.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -342,25 +377,25 @@ body {
 }
 
 .flower-decoration.top-left {
-    top: -30px;
-    left: -30px;
+    top: -20px;
+    left: -20px;
     transform: rotate(0deg);
 }
 
 .flower-decoration.bottom-right {
-    bottom: -30px;
-    right: -30px;
+    bottom: -20px;
+    right: -20px;
     transform: rotate(180deg);
 }
 
 /* FOTOS DE PAREJA */
 .couple-photo-container {
     width: 100%;
-    max-width: 300px;
+    /* max-width: clamp(250px, 80vw, 300px); */
     height: auto;
     border-radius: 8px;
     overflow: hidden;
-    margin-top: 35px;
+    margin-top: 25px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
@@ -369,14 +404,18 @@ body {
     width: 100%;
     height: auto;
     display: block;
+    /* max-width: clamp(250px, 80vw, 300px); */
 }
 
 /* REPRODUCTOR DE MÚSICA */
 .music-player {
     display: flex;
+    z-index: 2;
+    position: relative;
+    top: 30px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     margin-top: 10px;
     cursor: pointer;
     background-color: var(--accent-color);
@@ -384,15 +423,21 @@ body {
     border-radius: 50px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.2s ease;
+    touch-action: manipulation;
+    min-height: 44px; /* Para mejor accesibilidad táctil */
 }
 
 .music-player:hover {
     transform: translateY(-2px);
 }
 
+.music-player:active {
+    transform: translateY(0);
+}
+
 .play-button {
-    width: 35px;
-    height: 35px;
+    width: clamp(30px, 8vw, 35px);
+    height: clamp(30px, 8vw, 35px);
     background-color: transparent;
     border-radius: 50%;
     display: flex;
@@ -401,25 +446,27 @@ body {
     margin-right: 10px;
     position: relative;
     box-sizing: border-box;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .play-button::before {
     content: '';
     width: 0;
     height: 0;
-    border-top: 9px solid transparent;
-    border-bottom: 9px solid transparent;
-    border-left: 14px solid #fff;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid #fff;
     margin-left: 3px;
     transition: all 0.3s ease;
 }
 
 .play-button.playing::before {
     content: '';
-    width: 10px;
-    height: 18px;
-    border-left: 5px solid #fff;
-    border-right: 5px solid #fff;
+    width: 8px;
+    height: 16px;
+    border-left: 4px solid #fff;
+    border-right: 4px solid #fff;
     border-top: none;
     border-bottom: none;
     margin-left: 0;
@@ -427,60 +474,80 @@ body {
 
 .music-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9em;
+    font-size: clamp(0.8em, 3vw, 0.9em);
     color: #fff;
     margin: 0;
 }
 
 /* SECCIONES CON FONDOS ESPECÍFICOS */
-.countdown-section { /* Se aplica a los divs del contador */
+.countdown-section {
     background-color: var(--countdown-bg-color);
-    padding: 25px 20px;
+    padding: 20px 15px;
     border-radius: 8px;
-    margin-top: 30px;
-    width: 100%;
-    max-width: 340px;
+    width: 110%;
     box-shadow: inset 0 0 12px rgba(0,0,0,0.08);
 }
 
-/* Fondo para la sección de detalles del evento y la final */
 #event-details-section,
 #rsvp-section {
-    background-color: var(--countdown-bg-color); 
+    background-color: var(--countdown-bg-color);
 }
-
 
 /* BOTONES DE MAPA */
 .map-button {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 12px 25px;
+    background-color: #e0e6d6;
+    color: black;
+    padding: clamp(10px, 3vw, 12px) clamp(20px, 6vw, 25px);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.95em;
-    margin-bottom: 25px;
-    margin-top: 10px;
+    font-size: clamp(0.85em, 3vw, 0.95em);
+    margin-bottom: 20px;
+    margin-top: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
+    touch-action: manipulation;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    max-width: 280px;
 }
 
 .map-button:hover {
-    background-color: var(--secondary-text-color);
+    background-color: #e0e6d6;
     transform: translateY(-2px);
+}
+
+.map-button:active {
+    transform: translateY(0);
+}
+
+
+.imagen-con-degradado::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Aquí defines tu degradado */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
 }
 
 /* SEPARADORES Y DECORACIONES */
 .decorative-separator {
-    width: 100px;
-    height: 30px;
+    width: clamp(60px, 20vw, 100px);
+    height: clamp(20px, 6vw, 30px);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 30px auto;
+    margin: 25px auto;
 }
 
 .leaf-style {
@@ -492,12 +559,12 @@ body {
 }
 
 .decorative-icon {
-    width: 70px;
-    height: 70px;
+    width: clamp(50px, 15vw, 70px);
+    height: clamp(50px, 15vw, 70px);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 20px auto;
+    margin: 15px auto;
 }
 
 .champagne-glasses {
@@ -508,7 +575,7 @@ body {
     background-image: url('https://i.imgur.com/your_tuxedo_image.png');
 }
 
-/* ANIMACIONES (se mantienen, pero algunas ya no son para cambio de página completo) */
+/* ANIMACIONES */
 @keyframes pulse {
     0% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.05); opacity: 0.95; }
@@ -520,5 +587,185 @@ body {
     50% { opacity: 1; }
 }
 
-/* NO NECESITAMOS slideInFromBottom aquí, el scroll lo hace el navegador */
-/* .page.active se elimina en favor de la visibilidad y el scroll */
+/* MEDIA QUERIES PARA RESPONSIVE DESIGN */
+@media (max-width: 480px) {
+    .invitation-section {
+        padding: 15px 10px;
+        min-height: 100vh;
+    }
+    
+    .section-content,
+    .section-content-scale {
+        max-width: 100%;
+        padding: 15px 0;
+    }
+    
+    .cover-section {
+        transform: scale(1);
+    }
+    
+    .section-content-scale {
+        transform: scale(1.1);
+    }
+    
+    .envelope-image {
+        width: 200px;
+    }
+    
+    .countdown-timer {
+        font-size: 2em;
+        padding: 12px;
+        gap: 3px;
+    }
+    
+    .countdown-timer span {
+        min-width: 35px;
+        margin: 0 1px;
+    }
+    
+    .music-player {
+        top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .flower-decoration {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .flower-decoration.top-left {
+        top: -15px;
+        left: -15px;
+    }
+    
+    .flower-decoration.bottom-right {
+        bottom: -15px;
+        right: -15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-names {
+        font-size: 2.2em;
+    }
+    
+    .number-of-places {
+        font-size: 2.2em;
+    }
+    
+    .save-the-date-text,
+    .dress-code-title {
+        font-size: 1.8em;
+    }
+    
+    .wedding-date {
+        font-size: 1.3em;
+    }
+    
+    .countdown-timer {
+        font-size: 0.9em;
+    }
+    
+    .countdown-timer span {
+        min-width: 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .invitation-wrapper {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .invitation-section {
+        padding: 30px 25px;
+    }
+    
+    .section-content,
+    .section-content-scale {
+        max-width: 350px;
+    }
+    
+    .cover-section {
+        transform: scale(1.25);
+    }
+    
+    .section-content-scale {
+        transform: scale(0.75);
+    }
+}
+
+@media (min-width: 1024px) {
+    .invitation-wrapper {
+        max-width: 450px;
+    }
+    
+    .section-content,
+    .section-content-scale {
+        max-width: 400px;
+    }
+}
+
+/* Mejoras para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .envelope-wrapper:hover {
+        transform: none;
+    }
+    
+    .music-player:hover {
+        transform: none;
+    }
+    
+    .map-button:hover {
+        transform: none;
+    }
+    
+    .envelope-wrapper:active {
+        transform: scale(0.95);
+    }
+    
+    .music-player:active {
+        transform: scale(0.95);
+    }
+    
+    .map-button:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Mejoras para pantallas de alta densidad */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .envelope-image,
+    .couple-photo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Mejoras para orientación landscape en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .invitation-section {
+        min-height: 100vh;
+        padding: 10px 15px;
+    }
+    
+    .section-content,
+    .section-content-scale {
+        padding: 10px 0;
+    }
+    
+    .main-names {
+        font-size: clamp(1.8em, 6vw, 2.5em);
+        margin-bottom: 15px;
+    }
+    
+    .music-player {
+        top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .countdown-section {
+        margin-top: 15px;
+        padding: 15px 10px;
+    }
+}

@@ -4,13 +4,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainInvitationContent = document.getElementById('main-invitation-content');
     const welcomeSection = document.getElementById('welcome-section'); // La primera sección después del sobre
     const musicButton = document.getElementById('play-music');
+    const guessLabel = document.getElementById("guess");
     const backgroundMusic = document.getElementById('background-music');
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const guessNumber = urlParams.get('guest')
+    if(guessNumber) guessLabel.innerHTML = guessNumber
 
     // --- Lógica del Sobre y Revelación de Contenido ---
 
     if (envelopeClickArea && mainInvitationContent && welcomeSection) {
         envelopeClickArea.addEventListener('click', () => {
             console.log('¡Clic en el sobre detectado! Revelando invitación...');
+
+            backgroundMusic?.play?.()
+            .then(() => {
+                musicButton.classList.add('playing');
+                console.log('Música reproduciéndose.');
+            })
+            .catch(error => {
+                console.error('Error al intentar reproducir la música:', error);
+                // Mensaje amigable para el usuario
+                alert('No se pudo reproducir la música. Algunos navegadores requieren una interacción previa del usuario.');
+            });
             
             // Oculta el sobre suavemente
             envelopeClickArea.style.opacity = '0';
@@ -73,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Configura el contador para la fecha de la boda (24 de Octubre de 2026, 6 PM)
-    const weddingDate = new Date("October 24, 2026 18:00:00").getTime(); 
+    const weddingDate = new Date("August 16, 2025 16:00:00").getTime(); 
     setupCountdown(weddingDate, 'days', 'hours', 'minutes', 'seconds');
     setupCountdown(weddingDate, 'days2', 'hours2', 'minutes2', 'seconds2');
 

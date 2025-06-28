@@ -2,125 +2,230 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#F8F6F2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
     <title>¡Nos Casamos! Oriana & Juanma</title>
+    <meta name="description" content="Invitación de boda de Oriana y Juanma - Una celebración de amor">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
 
     <div class="invitation-wrapper">
-        <section id="cover-section" class="invitation-section cover-section">
-            <div class="section-content">
-                <p class="small-text-top">¡NOS CASAMOS!</p>
-                <h1 class="main-names">Oriana & Juanma</h1>
-                <div class="envelope-wrapper" id="envelope-click">
-                    <img src="img7.png" alt="Sobre con sello de cera" class="envelope-image">
-                    <!-- <p class="click-to-open">Haz click aquí para abrir</p> -->
+        <!-- Sección de portada con el sobre -->
+        <section id="cover-section" class="invitation-section cover-section" aria-label="Portada de la invitación">
+            <div class="section-content-scale">
+                <p class="small-text-top" style="margin-bottom: 25px;">¡NOS CASAMOS!</p>
+                <h1 class="main-names">Oriana y Juanma</h1>
+                <div class="envelope-wrapper" id="envelope-click" role="button" tabindex="0" aria-label="Haz clic para abrir la invitación">
+                    <img src="img7.png" alt="Sobre con sello de cera - Haz clic para abrir" class="envelope-image">
                 </div>
                 <p class="small-text-bottom">HEMOS RESERVADO</p>
-                <p class="number-of-places">1</p>
+                <p id="guess" class="number-of-places">1</p>
                 <p class="small-text-honor">LUGAR(ES) EN TU HONOR</p>
             </div>
-            <div class="flower-decoration top-left"></div>
-            <div class="flower-decoration bottom-right"></div>
+            <div class="flower-decoration top-left" aria-hidden="true"></div>
+            <div class="flower-decoration bottom-right" aria-hidden="true"></div>
         </section>
 
+        <!-- Contenido principal de la invitación -->
         <div id="main-invitation-content" class="main-invitation-content hidden">
 
-            <section id="welcome-section" class="invitation-section">
+            <!-- Sección de bienvenida -->
+            <section id="welcome-section" class="invitation-section" aria-label="Bienvenida">
                 <div class="section-content">
-                    <div class="music-player">
-                        <div class="play-button" id="play-music"></div>
-                        <p class="music-text">Dale play para escuchar nuestra canción</p>
-                        <audio id="background-music" src="your_music.mp3"></audio> </div>
-                    <p class="small-text-top">¡NOS CASAMOS!</p>
-                    <h1 class="main-names">Oriana & Juanma</h1>
-                    <p class="welcome-message">DESPUÉS DE 5 AÑOS LLEGA NUESTRO PARA SIEMPRE</p>
-                    <div class="couple-photo-container">
-                        <img src="img4.png" alt="Pareja feliz" class="couple-photo">
+                    <div class="music-player" role="button" tabindex="0" aria-label="Reproducir música de fondo">
+                        <div class="play-button" id="play-music" aria-hidden="true"></div>
+                        <p class="music-text">Esta es nuestra canción</p>
+                        <audio id="background-music" src="song.mp3" preload="none"></audio>
                     </div>
+                    <p class="small-text-top" style="margin-bottom: 25px; margin-top: 30px;">¡NOS CASAMOS!</p>
+                    <h1 class="main-names" style="font-size: 2.3rem;">Oriana y Juanma</h1>
+                    <p class="welcome-message" style="text-align: center;">DESPUÉS DE 8 AÑOS LLEGA NUESTRO PARA SIEMPRE</p>
+                    <img src="img11.jpeg" style="opacity: 0.8; width: 110%;" alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
                 </div>
-                <div class="flower-decoration top-left"></div>
-                <div class="flower-decoration bottom-right"></div>
+                <!-- <div class="flower-decoration top-left" aria-hidden="true"></div>
+                <div class="flower-decoration bottom-right" aria-hidden="true"></div> -->
             </section>
 
-            <section id="invitation-text-section" class="invitation-section">
-                <div class="section-content">
-                    <p class="invitation-blurb">
-                        Con la bendición de Dios y el corazón lleno de amor, hemos decidido unir nuestras vidas en matrimonio. Nos encantaría que nos acompañes a celebrar este día tan especial.
-                    </p>
-                    <div class="decorative-separator leaf-style"></div>
-                    <p class="bible-verse">
-                        Cordón de tres dobleces, no se rompe fácilmente.<br>Eclesiastés 4:12
-                    </p>
-                    <div class="countdown-section">
-                        <p class="countdown-title">Faltan</p>
-                        <div id="countdown" class="countdown-timer">
-                            <span id="days">00</span>
-                            <span class="unit">DAYS</span>
-                            <span id="hours">00</span>
-                            <span class="unit">HOURS</span>
-                            <span id="minutes">00</span>
-                            <span class="unit">MINUTES</span>
-                            <span id="seconds">00</span>
-                            <span class="unit">SECONDS</span>
+            <!-- Sección del texto de invitación -->
+            <section id="invitation-text-section"  style="
+            position: relative;
+            top: -44px;
+            background: transparent;
+        " aria-label="Mensaje de invitación">
+                <div class="section-content" style="padding: 0;">
+                    <img src="img12.png" style="width: 110%;"/>
+                    <div class="countdown-section" >
+                        <p class="countdown-title" style="font-family: 'Great Vibes', cursive; font-size: 3em;">Faltan</p>
+                        <div id="countdown" class="countdown-timer" role="timer" aria-live="polite">
+                            <span id="days" aria-label="días">00</span>
+                            <span class="unit">DÍAS</span>
+                            <span id="hours" aria-label="horas">00</span>
+                            <span class="unit">HORAS</span>
+                            <span id="minutes" aria-label="minutos">00</span>
+                            <span class="unit">MINUTOS</span>
+                            <span id="seconds" aria-label="segundos">00</span>
+                            <span class="unit">SEGUNDOS</span>
                         </div>
                     </div>
                 </div>
-                <div class="flower-decoration top-left"></div>
-                <div class="flower-decoration bottom-right"></div>
-            </section>
-
-            <section id="event-details-section" class="invitation-section">
-                <div class="section-content">
-                    <p class="event-type">Ceremonia</p>
-                    <p class="event-time">6:00 PM</p>
-                    <p class="event-place">IGLESIA LA ERMITA VIRGEN DE SUYAPA</p>
-                    <button class="map-button" onclick="window.open('https://maps.app.goo.gl/YourChurchLocation', '_blank')">VER MAPA</button>
-
-                    <p class="event-type">Recepción</p>
-                    <div class="decorative-icon champagne-glasses"></div>
-                    <p class="event-time">7:00 PM</p>
-                    <p class="event-place">SALÓN DE EVENTOS</p>
-                    <button class="map-button" onclick="window.open('https://maps.app.goo.gl/YourReceptionLocation', '_blank')">VER MAPA</button>
-
-                    <div class="decorative-separator heart-style"></div>
-                    <p class="bible-verse small-verse">
-                        El amor nunca deja de ser.<br>1 Corintios 13:8
-                    </p>
-                </div>
-                <div class="flower-decoration top-left"></div>
-                <div class="flower-decoration bottom-right"></div>
-            </section>
-
-            <section id="dress-code-section" class="invitation-section">
-                <div class="section-content">
-                    <div class="couple-photo-container">
-                        <img src="img8.png" alt="Pareja abrazándose" class="couple-photo">
+                <div class="imagen-con-degradado" style="width: 110%; position: relative;">
+                    <img src="img13.jpeg"  alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
+                    <div style="position: absolute;
+                    top: 0;
+                    z-index: 1;
+                    font-family: 'Great Vibes', cursive;
+                    font-size: 2em; width: 85%; text-align: center; color: black;">
+                        <h1 style="padding: 0; margin: 0; margin-top: 10px;">Save the date!</h1>
+                        <h2 style="padding: 0; margin: 0;">16.08.2025</h2>
                     </div>
-                    <p class="dress-code-title">Vestimenta</p>
-                    <div class="decorative-icon tuxedo-style"></div>
-                    <p class="dress-code-type">Formal de noche</p>
-                    <p class="dress-code-description">
-                        Este día el blanco es para la novia, el rojo para los pétalos y el negro para la noche. Solo tres colores prohibidos, pero millones para brillar. ¡Tú elige uno!
-                    </p>
                 </div>
-                <div class="flower-decoration top-left"></div>
-                <div class="flower-decoration bottom-right"></div>
+
             </section>
 
-            <section id="rsvp-section" class="invitation-section final-section">
+            <!-- Sección de detalles del evento -->
+            <section id="event-details-section" style="background-color: #677a67; position: relative; top: -45px;" class="invitation-section" aria-label="Detalles del evento">
                 <div class="section-content">
-                    <h2 class="main-names">¡Te esperamos!</h2>
-                    <p class="invitation-blurb">Por favor, confirma tu asistencia antes del 1 de octubre de 2026.</p>
-                    <button class="map-button" onclick="window.open('https://wa.me/YOUR_PHONE_NUMBER?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20boda.', '_blank')">CONFIRMAR ASISTENCIA (WhatsApp)</button>
-                    <p class="small-text-honor">Oriana & Juanma</p>
+                    <h2 class="event-type" style="font-family: 'Great Vibes', cursive; font-size: 2em;">Ceremonia</h2>
+                    <div class="decorative-icon champagne-glasses" style="display: flex; justify-content: center; height: auto;" aria-hidden="true">
+                        <img style="width: auto; height: 140px;" src="img15.png" alt="">
+                    </div>
+                    <time class="event-time" datetime="2026-10-24T18:00:00">4:00 PM</time>
+                    <address class="event-place">IGLESIA SANTA CLARA DE ASIS, CABAÑAS - BELLO</address>
+                    <a href="https://www.google.com/maps/place/Cl+24a+%23+51A-33,+Vegas+De+La+Cabana,+Medell%C3%ADn,+Bello,+Antioquia/@6.3136181,-75.5641934,17z/data=!4m6!3m5!1s0x8e442f16e3880e3d:0x7aaabd9c56bb1c80!8m2!3d6.3136181!4d-75.5593225!16s%2Fg%2F11x2m36nx9?entry=ttu&g_ep=EgoyMDI1MDYyNi4wIKXMDSoASAFQAw%3D%3D" 
+                       class="map-button" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Ver ubicación de la ceremonia en Google Maps">
+                        VER MAPA
+                    </a>
+
+                    <h2 class="event-type" style="font-family: 'Great Vibes', cursive; font-size: 2em;">Recepción</h2>
+                    <div class="decorative-icon champagne-glasses" style="display: flex; justify-content: center; height: auto;" aria-hidden="true">
+                        <img style="width: auto; height: 140px;" src="img14.jpg" alt="">
+                    </div>
+                    <time class="event-time" datetime="2026-10-24T19:00:00">6:00 PM</time>
+                    <address class="event-place">RESTAURANTE - LE PARCHE FOOD PARK</address>
+                    <a href="https://maps.app.goo.gl/AUrTibN6aQrFEHe38?g_st=iw" 
+                       class="map-button" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Ver ubicación de la recepción en Google Maps">
+                        VER MAPA
+                    </a>
+
+                    <div class="decorative-separator heart-style" aria-hidden="true"></div>
+                    <blockquote class="bible-verse small-verse" style="color: white;">
+                        El amor nunca deja de ser.<br>1 Corintios 13:8
+                    </blockquote>
                 </div>
-                <div class="flower-decoration top-left"></div>
-                <div class="flower-decoration bottom-right"></div>
+            </section>
+            <img src="img16.jpeg" style="width: 115%;
+            position: relative;
+            top: -45px;
+            left: -48px;
+            opacity: 0.7;" alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
+
+
+            <!-- Sección de código de vestimenta -->
+            <section id="dress-code-section" style="background-color: white;" aria-label="Código de vestimenta">
+                <div class="section-content" style="position: relative; top: -57px;">
+                    <div class="" style="background-color: white;">
+                        <img src="img17.jpg" style="width: 65%; margin: auto;" alt="Oriana y Juanma abrazándose" class="couple-photo">
+                    </div>
+                    <p class="dress-code-type" style="color: black; font-family: 'Great Vibes', cursive; font-size: 2em">Formal</p>
+                    <p class="dress-code-description" style="color: black;">
+                        Te pedimos que vengas con una vestimenta formal pero relajada, evitando el color blanco, reservado para la novia, y el verde oliva, que llevarán el novio y las damas de honor.
+                </div>
+                <div class="flower-decoration top-left" aria-hidden="true"></div>
+                <div class="flower-decoration bottom-right" aria-hidden="true"></div>
             </section>
 
-        </div> </div> <script src="script.js"></script>
+            <img src="img18.jpeg" style="width: 115%;
+            position: relative;
+            top: -45px;
+            left: -48px;
+            opacity: 0.7;" alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
+
+<section id="dress-code-section" style="background-color: white;" aria-label="Código de vestimenta">
+    <div class="section-content" style="position: relative;
+    top: -57px;
+    background: white;">
+        <p class="dress-code-type" style="color: black; font-family: 'Great Vibes', cursive; font-size: 2em;">Regalos</p>
+        <p class="dress-code-description" style="color: black;">
+            Lo más importante para nosotros es contar con su presencia en este día tan especial. No esperamos ningún tipo de regalo, pero si desean obsequiarnos algo, lo recibiremos con mucho cariño y gratitud.
+    </div>
+    <div class="flower-decoration top-left" aria-hidden="true"></div>
+    <div class="flower-decoration bottom-right" aria-hidden="true"></div>
+</section>
+
+<img src="img19.jpeg" style="width: 115%;
+position: relative;
+top: -45px;
+left: -48px;
+opacity: 0.7;" alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
+
+<div style="position: relative; display: flex; justify-content: center; ">
+    <img src="img20.png" style="width: 100%;
+    position: relative;
+    top: -43px;
+    opacity: 0.7;" alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
+
+    <div style="position: absolute;
+            bottom: 87px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;" >
+        <a href="https://wa.link/rp672v" class="map-button" target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación de la recepción en Google Maps" style="
+        margin: 0 auto;
+        border-radius: 26px;
+        background: #677a67;
+        color: white;
+        text-decoration: underline;
+    ">Confirma con Juanma
+    </a>
+    
+    <a href="https://wa.link/9fv1uo" class="map-button" target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación de la recepción en Google Maps" style="
+        margin: 0 auto;
+        border-radius: 26px;
+        background: #677a67;
+        color: white;
+        text-decoration: underline;
+    ">Confirma con Oriana
+    </a>
+    
+    </div>
+
+</div>
+<div style="
+background-color: #677a67;
+color: white;
+position: relative;
+top: -44px;
+padding: 10px;
+">
+    <h2 class="main-names">¡Con mucho cariño,</h2>
+    <h2 class="main-names">Oriana y Juanma</h2>
+    <h2 class="main-names">Te esperamos!</h2>
+</div>
+
+<img src="img21.jpeg" style="width: 115%;
+position: relative;
+top: -45px;
+left: -48px;
+opacity: 0.7;" alt="Oriana y Juanma - Foto de la pareja" class="couple-photo">
+
+
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
